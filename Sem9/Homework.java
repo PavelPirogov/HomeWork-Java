@@ -64,10 +64,19 @@ public class Homework {
 
         System.out.println(containers);
 
+        Set<Integer> containers2 = new TreeSet<>(Arrays.asList(container1.getWeigth(), container2.getWeigth(), container3.getWeigth()));
+        // Set<Container> containers3 = new TreeSet<>(Arrays.asList(container1, container2, container3));
+  
+        System.out.println(containers2);
+        // System.out.println(containers3);
+
+
+
     }
 
-    static class Container implements Iterable<Integer>, Comparable<Integer> {
+    static class Container implements Iterable<Integer>, Comparable<Container> {
         private List<Integer> boxs = new ArrayList<>();
+        int weight = this.getWeigth();
 
         public void addBox(Box box) {
             boxs.add(box.getWeigth());
@@ -82,8 +91,9 @@ public class Homework {
             return boxs.size();
         }
 
-        public int compareTo(Integer another) {
-            return boxs.size();
+        @Override
+        public int compareTo(Container another) {
+            return weight - another.getWeigth();
         }
 
         public int getWeigth() {
@@ -98,6 +108,8 @@ public class Homework {
         public String toString() {
             return "" + boxs + "";
         }
+
+
 
     }
 
