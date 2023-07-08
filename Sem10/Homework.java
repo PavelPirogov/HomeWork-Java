@@ -1,6 +1,5 @@
 
 import java.util.*;
-
 import javax.swing.*;
 
 public class Homework {
@@ -18,13 +17,13 @@ public class Homework {
      * коробка очищается, а вторая наполняется.
      */
     public static void main(String[] args) {
-        // Box<String> stringBox = new Box<>(); // не должно компилироваться
+        Box<String> stringBox = new Box<>(); // не должно компилироваться
 
         Box<Orange> orangeBox = new Box<>();
         orangeBox.addBox(new Orange(2));
         orangeBox.addBox(new Orange(1));
-        // orangeBox.addBox(new Apple(2)); // не должно компилироваться
-        // orangeBox.addBox(new GoldenApple(2)); // не должно компилироваться
+        orangeBox.addBox(new Apple(2)); // не должно компилироваться
+        orangeBox.addBox(new GoldenApple(2)); // не должно компилироваться
 
         System.out.println(orangeBox.getWeigthBox());
 
@@ -35,15 +34,15 @@ public class Homework {
 
         Box<GoldenApple> goldenAppleBox = new Box<>();
         goldenAppleBox.addBox(new GoldenApple(5)); // допустимый вариант
-        // goldenAppleBox.addBox(new Apple(5)); // не должно компилироваться
+        goldenAppleBox.addBox(new Apple(5)); // не должно компилироваться
         System.out.println(goldenAppleBox.getWeigthBox()); // 5
 
-        // goldenAppleBox.moveTo(appleBox); // допустимый вариант
-        // appleBox.moveTo(goldenAppleBox); // не должно компилироваться
-        // orangeBox.moveTo(appleBox); // не должно компилироваться
+        goldenAppleBox.moveTo(appleBox); // допустимый вариант              // Не работает
+        appleBox.moveTo(goldenAppleBox); // не должно компилироваться       // Не работает
+        orangeBox.moveTo(appleBox); // не должно компилироваться            // Не работает
 
         Box<Orange> orangeBox2 = new Box<>();
-        orangeBox.moveTo(orangeBox2);
+        orangeBox.moveTo(orangeBox2);                                       // Не работает
         System.out.println(orangeBox.getWeigthBox()); // 0
         System.out.println(orangeBox2.getWeigthBox()); // 3
     }
@@ -54,7 +53,6 @@ public class Homework {
         // FIXME: 06.07.2023 Реализовать методы согласно заданию.
 
         private Map<T, Integer> boxs = new HashMap<>();
-        // int weightBox = this.getWeigthBox();
 
         public void addBox(T fruct) {
             boxs.put(fruct, fruct.getWeight());
