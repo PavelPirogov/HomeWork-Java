@@ -30,9 +30,10 @@ class SimpleNode {
     }
 }
 
-// SimpleRedBlackTreeExample (Упрощенный пример черного дерева)
+// SimpleRedBlackTreeExample
 
-public class Home_4 {
+public class Home_4{
+
     public static void printTree(SimpleNode node, String prefix) {
         if (node != null) {
             System.out.println(prefix + node.value + "(" + node.color + ")");
@@ -41,31 +42,80 @@ public class Home_4 {
         }
     }
 
-    // • Каждая нода имеет цвет (красный или черный)
-    // • Корень дерева всегда черный
-    // • Новая нода всегда красная
-    // • Красные ноды могут быть только левым ребенком
-    // • У краной ноды все дети черного цвета
-    
+    public static SimpleNode add(SimpleNode root, int value) {
+        root = addRecursive(root, value);
+        root.color = Color.BLACK; // Корень всегда черный
+        return root;
+    }
+
+    private static SimpleNode addRecursive(SimpleNode node, int value) {
+        if (node == null) {
+            return new SimpleNode(value, Color.RED); // Вставляем новую красную ноду
+        }
+
+        if (value < node.value) {
+            node.left = addRecursive(node.left, value);
+        } else if (value > node.value) {
+            node.right = addRecursive(node.right, value);
+        }
+
+        // Выполняем операции балансировки
+        if (isRed(node.right) && !isRed(node.left)) {
+            node = rotateLeft(node);
+        }
+        if (isRed(node.left) && isRed(node.left.left)) {
+            node = rotateRight(node);
+        }
+        if (isRed(node.left) && isRed(node.right)) {
+            flipColors(node);
+        }
+
+        return node;
+    }
+
+    private static boolean isRed(SimpleNode node) {
+        return node != null && node.color == Color.RED;
+    }
+
+    private static SimpleNode rotateLeft(SimpleNode parent) {
+        SimpleNode rightChild = parent.right;
+        parent.right = rightChild.left;
+        rightChild.left = parent;
+        rightChild.color = parent.color;
+        parent.color = Color.RED;
+        return rightChild;
+    }
+
+    private static SimpleNode rotateRight(SimpleNode parent) {
+        SimpleNode leftChild = parent.left;
+        parent.left = leftChild.right;
+        leftChild.right = parent;
+        leftChild.color = parent.color;
+        parent.color = Color.RED;
+        return leftChild;
+    }
+
+    private static void flipColors(SimpleNode node) {
+        node.color = Color.RED;
+        node.left.color = Color.BLACK;
+        node.right.color = Color.BLACK;
+    }
+
     public static void main(String[] args) {
-        // Корень дерева всегда черный
-        SimpleNode root = new SimpleNode(10, Color.BLACK);
+        SimpleNode root = null;
 
-        // Красные ноды могут быть только левым ребенком
-        root.left = new SimpleNode(5, Color.RED);
+        root = add(root, 10);
+        root = add(root, 5);
+        root = add(root, 15);
+        root = add(root, 3);
+        root = add(root, 7);
+        root = add(root, 13);
+        root = add(root, 17);
+        root = add(root, 1);
+        root = add(root, 9);
+        root = add(root, 12);
+        root = add(root, 14);
 
-        // У красной ноды все дети черного цвета
-        root.left.left = new SimpleNode(3, Color.BLACK);
-        root.left.right = new SimpleNode(7, Color.BLACK);
-
-        // Добавляем черный узел с красным левым ребенком
-        root.right = new SimpleNode(15, Color.BLACK);
-        root.right.left = new SimpleNode(13, Color.RED);
-
-        // Новая нода всегда красная (добавляем к черному узлу)
-        root.right.right = new SimpleNode(17, Color.RED);
-
-        // Вывести дерево
         printTree(root, "");
     }
 }
