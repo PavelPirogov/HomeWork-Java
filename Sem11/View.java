@@ -1,6 +1,5 @@
 
 import java.util.Scanner;
-// import java.util.UUID;
 
 public class View {
         private final Scanner scanner;
@@ -33,39 +32,39 @@ public class View {
 
                 switch (command) {
                     case "1":
-                        System.out.print("Введите номер для группы: ");
+                        System.out.print("Введите номер группы: ");
                         Integer number = Integer.valueOf(scanner.nextLine());
                         groupPresenter.create(number);
                         System.out.println();
                         break;
                     case "2":
-                        System.out.println("Список всех групп:");
+                        System.out.println("Список групп:");
                         for (Group group : groupPresenter.getAll()) {
                             System.out.println(group);
                         }
                         System.out.println();
                         break;
                     case "3":
-                        System.out.print("Введите номер группы, в которую будете добавлять студента: ");
+                        System.out.print("Введите номер группы для студента: ");
                         number = Integer.valueOf(scanner.nextLine());
                         if (groupPresenter.getByNumber(number) != null) {
                             System.out.print("Введите имя студента: ");
                             String name = scanner.nextLine();
                             studentPresenter.create(name, groupPresenter.getId(number));
                         } else {
-                            System.err.println("Такой группы нет! Повторите попытку!");
+                            System.err.println("Такой группы несуществует. Повторите ввод.");
                         }
                         System.out.println();
                         break;
                     case "4":
-                        System.out.print("Введите номер группы, студентов которой нужно показать: ");
+                        System.out.print("Введите номер группы: ");
                         number = Integer.valueOf(scanner.nextLine());
                         if (groupPresenter.getByNumber(number) != null) {
                             for (Student student : studentPresenter.getAllByGroup(groupPresenter.getId(number))) {
                                 System.out.println(student);
                             }
                         } else {
-                            System.err.println("Группы с таким номером не существует! Повторите попытку!");
+                            System.err.println("Такой группы нет. Повторите.");
                         }
                         System.out.println();
                         break;

@@ -15,6 +15,7 @@ public class Homework {
      * - просмотр всех уроков у студента
      * lesson <-> studentGroup <- student
      */
+    
     public static void main(String[] args) {
         GroupModel groupModel = new GroupModel();
         StudentModel studentModel = new StudentModel();

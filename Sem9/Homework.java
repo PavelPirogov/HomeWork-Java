@@ -64,13 +64,13 @@ public class Homework {
 
         System.out.println(containers);
 
-        Set<Integer> containers2 = new TreeSet<>(Arrays.asList(container1.getWeigth(), container2.getWeigth(), container3.getWeigth()));
-        // Set<Container> containers3 = new TreeSet<>(Arrays.asList(container1, container2, container3));
-  
+        Set<Integer> containers2 = new TreeSet<>(
+                Arrays.asList(container1.getWeigth(), container2.getWeigth(), container3.getWeigth()));
+        // Set<Container> containers3 = new TreeSet<>(Arrays.asList(container1,
+        // container2, container3));
+
         System.out.println(containers2);
         // System.out.println(containers3);
-
-
 
     }
 
@@ -108,8 +108,6 @@ public class Homework {
         public String toString() {
             return "" + boxs + "";
         }
-
-
 
     }
 

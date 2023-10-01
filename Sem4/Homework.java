@@ -35,7 +35,7 @@ public class Homework {
 
         while (true) {
             String command = scanner.nextLine();
-            
+
             if ("exit".equals(command)) {
                 System.exit(0);
             }
